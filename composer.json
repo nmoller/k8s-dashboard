@@ -1,0 +1,21 @@
+{
+    "name": "nmoller/k8s-templates",
+    "description": "We want to automatically generate the most used yaml files for k8s.",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.0",
+        "danjam/slim-mustache-view": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "license": "WTF",
+    "authors": [
+        {
+            "name": "Nelson Moller",
+            "email": "nmoller.c@gmail.com"
+        }
+    ]
+}
