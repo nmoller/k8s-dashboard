@@ -1,4 +1,4 @@
-# Bootstrap 4 SB Admin for slim with {{mustache}}
+# Slim with {{mustache}} and SB-Admin bootstrap
 From: 
 
 https://startbootstrap.com/template-overviews/sb-admin/
