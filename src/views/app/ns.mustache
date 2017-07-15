@@ -22,6 +22,92 @@
                     </ol>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Services</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                {{#services}}
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">svc</span>
+                                        <i class="fa fa-fw fa-calendar"></i> {{.}}
+                                    </a>
+                                {{/services}}
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Info</button>
+
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Liste des services {{namespace}}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-lg-3"></div>
+                                                    <div class="col-lg-6">
+                                                    {{#services_details}}
+                                                        {{{.}}}
+                                                    {{/services_details}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i>Create service file yaml</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+
+                            <fieldset disabled>
+
+                                <div class="form-group">
+                                    <label for="disabledSelect">Disabled input</label>
+                                    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="disabledSelect">Disabled select menu</label>
+                                    <select id="disabledSelect" class="form-control">
+                                        <option>Disabled select</option>
+                                    </select>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox">Disabled Checkbox
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Disabled Button</button>
+
+                            </fieldset>
+
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
 
     </div>

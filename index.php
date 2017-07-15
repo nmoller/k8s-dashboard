@@ -8,6 +8,7 @@
 
 
 require __DIR__ . '/vendor/autoload.php';
+use \nmoller\k8sobjects\Base;
 
 // Create Slim app
 $app = new \Slim\App();
@@ -80,6 +81,7 @@ $app->group('/app', function () use ($app) {
         $this->view = $view;
         $test = new nmoller\command\k8sns();
         $namespaces = $test();
+
         return $this->view->render($response, 'index.mustache',
             ['page_title' => 'Home', 'page' => 'index', 'drop-ns' => 'Namespaces', 'namespaces'=>$namespaces]
         );
@@ -87,8 +89,23 @@ $app->group('/app', function () use ($app) {
 
     $app->get('/ns/{name}', function($request, $response, $args) use ($view){
         $this->view = $view;
+        $services = new nmoller\command\k8sservices();
+        $svcs = json_decode($services($args['name']));
+        $svc = [];
+        $services_details = [];
+        foreach ($svcs->items as $sv) {
+            $svc[] = $sv->metadata->name;
+            $s = new Base();
+            $s->spec = $sv->spec;
+            $s->metadata = $sv->metadata;
+            $services_details[] = $s;
+        }
         return $this->view->render($response, 'ns.mustache',
-            ['page_title' => $args['name'], 'page' => 'index', 'drop-ns' => $args['name'],'namespace' => $args['name'] ]
+            ['page_title' => $args['name'], 'page' => 'index', 'drop-ns' => $args['name'],
+                'namespace' => $args['name'],
+                'services' => $svc,
+                'services_details' => $services_details,
+                ]
         );
     });
 });
