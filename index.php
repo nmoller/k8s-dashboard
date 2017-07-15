@@ -78,8 +78,17 @@ $app->group('/app', function () use ($app) {
 
     $app->get('', function($request, $response, $args) use ($view){
         $this->view = $view;
+        $test = new nmoller\command\k8sns();
+        $namespaces = $test();
         return $this->view->render($response, 'index.mustache',
-            ['page_title' => 'Home', 'page' => 'index']
+            ['page_title' => 'Home', 'page' => 'index', 'drop-ns' => 'Namespaces', 'namespaces'=>$namespaces]
+        );
+    });
+
+    $app->get('/ns/{name}', function($request, $response, $args) use ($view){
+        $this->view = $view;
+        return $this->view->render($response, 'ns.mustache',
+            ['page_title' => $args['name'], 'page' => 'index', 'drop-ns' => $args['name'],'namespace' => $args['name'] ]
         );
     });
 });
