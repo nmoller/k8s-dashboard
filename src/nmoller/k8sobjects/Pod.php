@@ -10,6 +10,10 @@ namespace nmoller\k8sobjects;
 
 
 class Pod extends Base {
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function __toString() {
         $out2 = '<ul class="list-group">';
         $out2 .= '<li class="list-group-item active">'.$this->metadata->name.'</li>';

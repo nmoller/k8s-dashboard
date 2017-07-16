@@ -10,6 +10,11 @@ namespace nmoller\k8sobjects;
 
 
 class Service extends Base {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function __toString() {
         $vals = $this->spec->ports;
         $out2 = '<ul class="list-group">';
@@ -20,5 +25,12 @@ class Service extends Base {
         $out2 .= '<li class="list-group-item">Target port: '.$vals[0]->targetPort.'</li>';
         $out2 .= '</ul>';
         return "$out2";
+    }
+
+    public function toYaml($data) {
+        $file_service = $data['service_ns'] . '-'.$data['service_name'];
+        // we put the data in the service template
+        $svc = $this->file_view->render('service', ['service' => $data]);
+        file_put_contents($this->output_folder. $file_service, $svc);
     }
 }
