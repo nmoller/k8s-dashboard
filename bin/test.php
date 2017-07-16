@@ -10,17 +10,20 @@ require __DIR__.'/../vendor/autoload.php';
 
 use \nmoller\k8sobjects\Base;
 
-//$test = new nmoller\command\k8sns();
+/*
+ $test = new nmoller\command\k8sns();
 
-//$test = new nmoller\command\k8sservices();
-//$svcs = json_decode($test('siad-moodle-dev-01'));
-//$my_ob = new Base();
-//$my_ob = $svcs->items[0];
-//print_r($my_ob->kind);
+$test = new nmoller\command\k8sservices();
+$svcs = json_decode($test('siad-moodle-dev-01'));
+$my_ob = new Base();
+$my_ob = $svcs->items[0];
+print_r($my_ob->kind);
+*/
 
+/*
 $test = new nmoller\command\k8spods();
 $pods = json_decode($test('siad-moodle-dev-01'));
-//print_r($pods->items);
+print_r($pods->items);
 $my_pods = [];
 foreach ($pods->items as $pod) {
     $p = new nmoller\k8sobjects\Pod();
@@ -33,4 +36,7 @@ foreach ($pods->items as $pod) {
 foreach ($my_pods as $p) {
     echo $p;
 }
-
+*/
+$test = new nmoller\command\k8sservices();
+$svcs = json_decode($test('kube-public'));
+print_r($svcs);

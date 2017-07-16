@@ -86,6 +86,28 @@ $app->group('/app', function () use ($app) {
         );
     });
 
+    $app->post('/service/create', function ($request, $response, $args) use($view){
+        $this->view = $view;
+
+        $file_view = new Mustache_Engine([
+            'loader' => new Mustache_Loader_FilesystemLoader(__DIR__.'/src/views/k8s')
+        ]);
+
+        $data = $request->getParsedBody();
+        $file_service = $data['service_ns'] . '-'.$data['service_name'];
+        $svc = $file_view->render('service', ['service' => $data]);
+        file_put_contents(__DIR__.'/output/'. $file_service, $svc);
+        // to debug, output everything to std
+        ob_start();
+        print_r($data);
+        $out = ob_get_contents();
+        ob_end_clean();
+        return $this->view->render($response, 'debug.mustache',
+            ['content' => $out]
+        );
+
+    })->setName('creation');
+
     $app->get('/ns/{name}', function($request, $response, $args) use ($view){
         $this->view = $view;
         $services = new nmoller\command\k8sservices();

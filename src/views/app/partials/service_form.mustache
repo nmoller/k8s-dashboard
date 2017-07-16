@@ -1,0 +1,36 @@
+<form role="form" action="/app/service/create" method="post" id="service_creation_form">
+
+    <fieldset>
+
+        <input type="hidden" name="service_ns" value={{ namespace }}>
+
+        <div class="form-group">
+            <label for="service_name">Name</label>
+            <input class="form-control" id="service_name" name="service_name" type="text" placeholder="Service name">
+        </div>
+
+        <div class="form-group">
+            <label for="service_selector_app">Selector app</label>
+            <input class="form-control" id="service_selector_app" name="service_selector_app" type="text" placeholder="service_selector_app">
+        </div>
+
+        <div class="form-group">
+            <label for="service_port"> Port</label>
+            <input class="form-control" id="service_port" name="service_port" type="text" placeholder="service_port">
+        </div>
+
+        <div class="form-group">
+            <label for="service_targetPort">Target port</label>
+            <input class="form-control" id="service_targetPort" name="service_targetPort" type="text" placeholder="service_targetPort">
+        </div>
+
+        <div class="form-group">
+            <label for="service_nodePort">Node port</label>
+            <input class="form-control" id="service_nodePort" name="service_nodePort" type="text" placeholder="service_nodePort">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Create">
+
+    </fieldset>
+
+</form>
