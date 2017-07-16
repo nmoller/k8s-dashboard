@@ -27,10 +27,14 @@ class Service extends Base {
         return "$out2";
     }
 
-    public function toYaml($data) {
+    public function getFileName($data) {
         $file_service = $data['service_ns'] . '-'.$data['service_name'];
+        return $file_service;
+    }
+
+    public function toYaml($data) {
         // we put the data in the service template
         $svc = $this->file_view->render('service', ['service' => $data]);
-        file_put_contents($this->output_folder. $file_service, $svc);
+        file_put_contents($this->output_folder. $this->getFileName($data) . '.yaml', $svc);
     }
 }

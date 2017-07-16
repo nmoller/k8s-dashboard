@@ -1,3 +1,23 @@
+{{> head-html }}
+
+<body>
+
 <pre>
     {{ content }}
 </pre>
+
+<a href="/app/ns/{{namespace}}" class="btn btn-info">
+    <span class="badge">Back to {{namespace}}</span>
+    <i class="fa fa-fw fa-refresh"></i> {{.}}
+</a>
+
+<a href="/app/download/{{file}}" class="btn btn-info">
+    <span class="badge">Download</span>
+    <i class="fa fa-fw fa-file"></i> {{.}}
+</a>
+
+{{> js }}
+</body>
+
+</html>
+

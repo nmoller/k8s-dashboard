@@ -99,7 +99,7 @@ $app->group('/app', function () use ($app) {
         $out = ob_get_contents();
         ob_end_clean();
         return $this->view->render($response, 'debug.mustache',
-            ['content' => $out]
+            ['content' => $out, 'file' => $service->getFileName($data), 'namespace'=>$data['service_ns']]
         );
 
     })->setName('creation');
@@ -140,6 +140,22 @@ $app->group('/app', function () use ($app) {
                 ]
         );
     });
+
+    $app->get('/download/{file}', function($request, $response, $args) {
+        $file = __DIR__ . '/output/' . $args['file'] . '.yaml';
+        $fh = fopen($file, 'rb');
+        $stream = new \Slim\Http\Stream($fh); // create a stream instance for the response body;
+        return $response->withHeader('Content-Type', 'application/force-download')
+            ->withHeader('Content-Type', 'application/octet-stream')
+            ->withHeader('Content-Type', 'application/download')
+            ->withHeader('Content-Description', 'File Transfer')
+            ->withHeader('Content-Transfer-Encoding', 'binary')
+            ->withHeader('Content-Disposition', 'attachment; filename="' . basename($file) . '"')
+            ->withHeader('Expires', '0')
+            ->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
+            ->withHeader('Pragma', 'public')
+            ->withBody($stream); // all stream contents will be sent to the response
+    })->setName('download');
 });
 
 
