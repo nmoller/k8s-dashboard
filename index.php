@@ -137,6 +137,8 @@ $app->group('/app', function () use ($app) {
                 'services_details' => $services_details,
                 'pods_names' => $pods_names,
                 'pods_details' => $my_pods,
+                'svc_quantity' => count($svcs->items),
+                'pods_quantity' => count($pods->items),
                 ]
         );
     });
