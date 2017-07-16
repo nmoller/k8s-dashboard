@@ -8,7 +8,6 @@
 
 
 require __DIR__ . '/vendor/autoload.php';
-use \nmoller\k8sobjects\Base;
 
 // Create Slim app
 $app = new \Slim\App();
@@ -95,16 +94,31 @@ $app->group('/app', function () use ($app) {
         $services_details = [];
         foreach ($svcs->items as $sv) {
             $svc[] = $sv->metadata->name;
-            $s = new Base();
+            $s = new nmoller\k8sobjects\Service();
             $s->spec = $sv->spec;
             $s->metadata = $sv->metadata;
             $services_details[] = $s;
+        }
+
+        $pods = new nmoller\command\k8spods();
+        $pods = json_decode($pods($args['name']));
+        $pods_names = [];
+        $my_pods = [];
+        foreach ($pods->items as $pod) {
+            $p = new nmoller\k8sobjects\Pod();
+            $p->kind = $pod->kind;
+            $p->metadata = $pod->metadata;
+            $pods_names[] = $pod->metadata->name;
+            $p->spec = $pod->spec;
+            $my_pods[] = $p;
         }
         return $this->view->render($response, 'ns.mustache',
             ['page_title' => $args['name'], 'page' => 'index', 'drop-ns' => $args['name'],
                 'namespace' => $args['name'],
                 'services' => $svc,
                 'services_details' => $services_details,
+                'pods_names' => $pods_names,
+                'pods_details' => $my_pods,
                 ]
         );
     });
