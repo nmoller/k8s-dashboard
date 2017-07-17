@@ -13,6 +13,12 @@ class k8spods {
     public function __invoke($ns) {
         $headP = new Process("kubectl -n $ns get pods --output=json");
         $headP->run();
+        $error = $headP->getErrorOutput();
+        if ($error) {
+            if (strpos($error, 'Forbidden') !== false)
+                return '{"authorized": 0}';
+            return '{}';
+        }
         $list = $headP->getOutput();
         return $list;
     }

@@ -37,6 +37,6 @@ foreach ($my_pods as $p) {
     echo $p;
 }
 */
-$test = new nmoller\command\k8sservices();
-$svcs = json_decode($test('kube-public'));
-print_r($svcs);
+$test = new nmoller\command\k8spods();
+//$svcs = json_decode($test('kube-public'));
+print_r($test('siad-jenkins-dev-01'));
