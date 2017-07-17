@@ -120,7 +120,7 @@ $app->group('/app', function () use ($app) {
 
         $pods = new nmoller\command\k8spods();
         $pods = json_decode($pods($args['name']));
-        if (!empty($pods->authorized) && !$pods->authorized) {
+        if (isset($pods->authorized) && !$pods->authorized) {
             return $this->view->render($response, 'ns-unauthorized.mustache',
               ['page_title' => $args['name'],
                'page' => 'index',
